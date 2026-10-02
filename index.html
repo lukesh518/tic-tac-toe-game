@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="neon-dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A feature-rich, interactive Tic-Tac-Toe game with single-player AI, local 2-player mode, customizable grid sizes, synthesized audio, themes, and animations.">
+    <title>Ultimate Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1 class="game-title">
+                <span class="mark-x-color">TIC</span>
+                <span class="accent-color">TAC</span>
+                <span class="mark-o-color">TOE</span>
+            </h1>
+            <p class="game-subtitle">Modern • Interactive • AI Powered</p>
+        </header>
+
+        <!-- Control Bar (Settings & Options) -->
+        <section class="controls-panel" aria-label="Game Settings">
+            <div class="control-group">
+                <label for="mode-select" class="control-label">Mode:</label>
+                <select id="mode-select" class="select-input">
+                    <option value="pvp">👥 2 Players (Local)</option>
+                    <option value="pve" selected>🤖 vs AI</option>
+                </select>
+            </div>
+
+            <div class="control-group" id="difficulty-group">
+                <label for="difficulty-select" class="control-label">Difficulty:</label>
+                <select id="difficulty-select" class="select-input">
+                    <option value="easy">🟢 Easy</option>
+                    <option value="medium">🟡 Medium</option>
+                    <option value="hard" selected>🔴 Unbeatable AI</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="grid-select" class="control-label">Grid:</label>
+                <select id="grid-select" class="select-input">
+                    <option value="3" selected>3 × 3 (Classic)</option>
+                    <option value="4">4 × 4 (Advanced)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="theme-select" class="control-label">Theme:</label>
+                <select id="theme-select" class="select-input">
+                    <option value="neon-dark" selected>🌌 Neon Dark</option>
+                    <option value="glass-light">☀️ Light Glass</option>
+                    <option value="sunset-glow">🌅 Sunset Glow</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Status Indicator -->
+        <div class="status-bar" id="status-bar" aria-live="polite">
+            <span class="status-text" id="status-text">Player <strong class="mark-x-color">X</strong>'s Turn</span>
+        </div>
+
+        <!-- Scoreboard -->
+        <section class="scoreboard" aria-label="Scoreboard">
+            <div class="score-card card-x" id="score-card-x">
+                <div class="score-label" id="label-player-x">Player X</div>
+                <div class="score-value" id="score-x">0</div>
+            </div>
+            <div class="score-card card-draw">
+                <div class="score-label">Draws</div>
+                <div class="score-value" id="score-draw">0</div>
+            </div>
+            <div class="score-card card-o" id="score-card-o">
+                <div class="score-label" id="label-player-o">AI (O)</div>
+                <div class="score-value" id="score-o">0</div>
+            </div>
+        </section>
+
+        <!-- Game Board Container -->
+        <main class="board-wrapper">
+            <div class="board" id="board" role="grid" aria-label="Tic-Tac-Toe Game Board">
+                <!-- Cells generated dynamically by script.js -->
+            </div>
+            <!-- Dynamic SVG Winning Line overlay -->
+            <svg class="winning-line-svg" id="winning-line-svg">
+                <line id="winning-line" x1="0" y1="0" x2="0" y2="0" />
+            </svg>
+            <!-- Confetti Canvas -->
+            <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+        </main>
+
+        <!-- Action Buttons -->
+        <footer class="action-bar">
+            <button id="btn-restart" class="btn btn-primary" title="Start a new round (Shortcut: R)">
+                <span>🔄</span> New Round
+            </button>
+            <button id="btn-undo" class="btn btn-secondary" title="Undo last move (Shortcut: U)" disabled>
+                <span>↩️</span> Undo
+            </button>
+            <button id="btn-reset-scores" class="btn btn-secondary" title="Reset all scoreboard stats">
+                <span>🧹</span> Reset Score
+            </button>
+            <button id="btn-sound" class="btn btn-icon" title="Toggle Sound (Shortcut: M)" aria-label="Toggle Sound">
+                <span id="sound-icon">🔊</span>
+            </button>
+        </footer>
+
+        <!-- Help & Shortcuts Footer -->
+        <aside class="keyboard-hints">
+            <p>⌨️ <strong>Shortcuts:</strong> <kbd>R</kbd> Restart | <kbd>U</kbd> Undo | <kbd>M</kbd> Sound | <kbd>Arrow Keys</kbd> & <kbd>Enter</kbd> to play</p>
+        </aside>
+    </div>
+
+    <!-- Win / Draw Modal Overlay -->
+    <div class="modal-overlay hidden" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-card">
+            <div class="modal-icon" id="modal-icon">🏆</div>
+            <h2 class="modal-title" id="modal-title">Player X Wins!</h2>
+            <p class="modal-message" id="modal-message">Awesome move! Want to play another round?</p>
+            <div class="modal-actions">
+                <button id="modal-btn-play-again" class="btn btn-primary btn-large">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
